@@ -1,0 +1,6 @@
+FROM node:9.6.1
+WORKDIR /opt/frontend
+RUN npm install
+
+EXPOSE 8000
+CMD npm start

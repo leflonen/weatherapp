@@ -1,0 +1,7 @@
+FROM node:7.8
+WORKDIR /opt/backend
+RUN npm install --production
+RUN npm update
+
+EXPOSE 9000
+CMD npm run-script dev
