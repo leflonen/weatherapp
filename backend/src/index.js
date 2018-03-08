@@ -1,4 +1,4 @@
-const debug = require('debug')('weathermap');
+// const debug = require('debug')('weathermap');
 
 const Koa = require('koa');
 const router = require('koa-router')();
@@ -7,7 +7,6 @@ const cors = require('kcors');
 
 const appId = process.env.APPID || '';
 const mapURI = process.env.MAP_ENDPOINT || '';
-const targetCity = process.env.TARGET_CITY || '';
 
 const port = process.env.PORT || 9000;
 

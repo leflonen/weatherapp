@@ -1,19 +1,33 @@
 version: '3.5'
 
+networks:
+  frontnet:
+  backnet:
+
 services:
-  backend:
-    build: ./backend
-    environment:
-      - APPID=
-      - TARGET_CITY=tampere,fi
-      - MAP_ENDPOINT=http://api.openweathermap.org/data/2.5
-    volumes:
-      - ./backend:/opt/backend
-    ports:
-      - 9000:9000
   frontend:
     build: ./frontend
+    container_name: frontend1
+    networks:
+      - frontnet
+    ports:
+      - "8000:8000"
+    environment:
+      - NAME=frontend_container
+      - ENDPOINT=http://localhost:9000
     volumes:
       - ./frontend:/opt/frontend
+
+
+  backend:
+    build: ./backend
+    container_name: backend
+    networks:
+      - backnet
+    environment:
+      - MAP_ENDPOINT=http://api.openweathermap.org/data/2.5
+      - APPID=your_app_id
     ports:
-      - 8000:8000
+      - "9000:9000"
+    volumes:
+      - ./backend:/opt/backend

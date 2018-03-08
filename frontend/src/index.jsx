@@ -4,42 +4,45 @@ import ReactDOM from 'react-dom';
 
 const baseURL = process.env.ENDPOINT;
 
-// const getLocation = async () => {
-//   if ('geolocation' in navigator) {
-//     const coords = await navigator.geolocation.getCurrentPosition(function (position) {
-//       //tää tulee vika
-//       return position;
-//     });
-//   }
-//   //menee tänne eka, miten sais tän vika???
-//   return 'asd';
-// };
 
+// helper function for making sure that coordinates are fetched in correct order
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
 
-const getWeatherFromApi = async (position) => {
+const getWeatherFromApi = async () => {
+  let latitude = 'unknown';
+  let longitude = 'unknown';
+  navigator.geolocation.getCurrentPosition((location) => {
+    latitude = location.coords.latitude;
+    longitude = location.coords.longitude;
+  }, error => alert('Geolocation not supported or turned on')
+);
+
+  // while loop to finish getting the coordinates from the end user
+  // so the API call doesn't get "unknown" values as coordinates.
+  // TODO: make this pretty or find a better way to do this
+  let bool = false;
+  while (bool === false) {
+    if (longitude === 'unknown' && longitude === 'unknown') {
+      await sleep(500);
+    } else {
+      bool = true;
+    }
+  }
   try {
-    const response = await fetch(`${baseURL}/weather/${position.latitude}/${position.longitude}`);
+    const response = await fetch(`${baseURL}/api/weather/${latitude}/${longitude}`);
     return response.json();
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
   return {};
 };
-
-function success(pos) {
-  let crd = pos.coords;
-  console.log(crd);
-  return crd;
-};
-
-
 
 
 class Weather extends React.Component {
   constructor(props) {
     super(props);
-
-
     this.state = {
       current: '',
       day1: '',
@@ -47,22 +50,17 @@ class Weather extends React.Component {
       day3: '',
       day4: '',
       day5: '',
-      lat: '',
     };
   }
 
   async componentWillMount() {
-    const weather2 = navigator.geolocation.getCurrentPosition(getWeatherFromApi);
-
-    console.log(weather2);
-    const weather = await getWeatherFromApi('60', '32');
+    const weather = await getWeatherFromApi();
     this.setState({ current: weather.current.slice(0, -1) });
     this.setState({ day1: weather.day1.slice(0, -1) });
     this.setState({ day2: weather.day2.slice(0, -1) });
     this.setState({ day3: weather.day3.slice(0, -1) });
     this.setState({ day4: weather.day4.slice(0, -1) });
     this.setState({ day5: weather.day5.slice(0, -1) });
-
   }
 
   render() {
@@ -72,7 +70,6 @@ class Weather extends React.Component {
     const { day3 } = this.state;
     const { day4 } = this.state;
     const { day5 } = this.state;
-
     return (
       <div>
         <div className="icon">

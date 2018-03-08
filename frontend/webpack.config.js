@@ -41,6 +41,8 @@ module.exports = {
     new webpack.DefinePlugin({
       'process.env': {
         ENDPOINT: JSON.stringify(process.env.ENDPOINT || 'http://0.0.0.0:9000/api'),
+        NAME: JSON.stringify(process.env.NAME || 'variable missing from docker-compose'),
+        LOLPOINT: JSON.stringify(process.env.LOLPOINT || 'variable missing from docker-compose'),
       },
     }),
   ],
