@@ -24,3 +24,7 @@ Works only on linux!
 4. Inside CLI in the directory where docker-compose.yml file is located, type `export YOUR_APPID="-"; docker-compose up --build` changing the `"-"` to your openweathermap API-key
 
 5. Open up your browser and navigate to http://localhost:8000 where you will be prompted to give your current position to the service.
+
+## Troubleshooting
+
+If there are errors when building the images with the npm commands, modify the dockerfile command `RUN npm install`to  `npm install --save-dev` in the backend directory. If this fails, run `npm install` in both the frontend and backend directories.
