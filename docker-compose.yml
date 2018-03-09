@@ -26,7 +26,7 @@ services:
       - backnet
     environment:
       - MAP_ENDPOINT=http://api.openweathermap.org/data/2.5
-      - APPID=your_app_id
+      - APPID=${YOUR_APPID}
     ports:
       - "9000:9000"
     volumes:

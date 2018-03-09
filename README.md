@@ -19,10 +19,8 @@ Works only on linux!
 
 2. Get an openweathermap API-key from http://openweathermap.org/
 
-3. Download the files from this repository
+3. Clone this repository `git clone git@github.com:leflonen/weatherapp.git`
 
-4. Inside docker-compose.yml, change the APPID variable to your openweathermap API-key
+4. Inside CLI in the directory where docker-compose.yml file is located, type `export YOUR_APPID="-"; docker-compose up --build` changing the `"-"` to your openweathermap API-key
 
-5. Inside CLI in the directory where docker-compose.yml file is located, type "docker-compose up --build"
-
-6. Open up your browser and navigate to localhost:8000 where you will be prompted to give your current position to the service.
+5. Open up your browser and navigate to http://localhost:8000 where you will be prompted to give your current position to the service.
