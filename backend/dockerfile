@@ -1,6 +1,6 @@
 FROM node:7.8
 WORKDIR /opt/backend
-RUN npm install --production
+RUN npm install
 RUN npm update
 
 EXPOSE 9000

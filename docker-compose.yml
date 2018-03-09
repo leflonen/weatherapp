@@ -17,6 +17,7 @@ services:
       - ENDPOINT=http://localhost:9000
     volumes:
       - ./frontend:/opt/frontend
+      - /opt/frontend/node_modules
 
 
   backend:
@@ -31,3 +32,4 @@ services:
       - "9000:9000"
     volumes:
       - ./backend:/opt/backend
+      - /opt/backend/node_modules
