@@ -27,4 +27,4 @@ Works only on linux!
 
 ## Troubleshooting
 
-If there are errors when building the images with the npm commands, modify the dockerfile command `RUN npm install`to  `npm install --save-dev` in the backend directory. If this fails, run `npm install` in both the frontend and backend directories.
+If there are errors when building the images with the npm commands, modify the dockerfile command `RUN npm install`to  `RUN npm install --save-dev` in the backend directory. If this fails, run `npm install` in both the frontend and backend directories.
